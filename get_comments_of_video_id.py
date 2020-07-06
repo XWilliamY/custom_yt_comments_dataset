@@ -42,7 +42,7 @@ def get_comments(**kwargs):
     """
 
     # edit these list declarations as needed
-    comments, commentsId, repliesCount, likesCount, updatedAt = [], [], [], [], []
+    comments, commentsId, repliesCount, likesCount, updatedAt, viewerRating = [], [], [], [], [], []
 
     # clean kwargs
 
@@ -80,6 +80,7 @@ def get_comments(**kwargs):
             reply_count = item['snippet']['totalReplyCount']
             like_count = item['snippet']['topLevelComment']['snippet']['likeCount']
             updated_at = item['snippet']['topLevelComment']['snippet']['updatedAt']
+            viewer_rating = item['snippet']['topLevelComment']['snippet']['viewerRating']
 
             # append to corresponding list
             comments.append(comment)
@@ -87,12 +88,13 @@ def get_comments(**kwargs):
             repliesCount.append(reply_count)
             likesCount.append(like_count)
             updatedAt.append(updated_at)
+            viewerRating.append(viewer_rating)
 
             if write_lbl:
                 with open(f'{csv_filename}.csv', 'a+') as f:
                     # https://thispointer.com/python-how-to-append-a-new-row-to-an-existing-csv-file/#:~:text=Open%20our%20csv%20file%20in,in%20the%20associated%20csv%20file
                     csv_writer = writer(f)
-                    csv_writer.writerow([comment, comment_id, reply_count, like_count, updated_at])
+                    csv_writer.writerow([comment, comment_id, reply_count, like_count, viewer_rating, updated_at])
 
         # check if there's a next page
         if 'nextPageToken' in response:
@@ -111,7 +113,8 @@ def get_comments(**kwargs):
         'Comment ID' : commentsId,
         'Reply Count' : repliesCount,
         'Like Count' : likesCount,
-        'Updated At' : updatedAt
+        'Updated At' : updatedAt,
+        'Viewer Rating': viewerRating
     }
 
 def save_to_csv(output_dict, video_id, output_filename):
