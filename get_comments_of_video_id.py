@@ -156,10 +156,3 @@ def main():
 if __name__ == '__main__':
     # do the things
     main()
-
-
-
-
-shorthand = {
-    'updated_at' : item['snippet']['topLevelComment']['snippet']['updatedAt']
-}
