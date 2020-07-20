@@ -132,6 +132,7 @@ def main():
     parser.add_argument('--video_url', default='https://www.youtube.com/watch?v=ioNng23DkIM')
     parser.add_argument('--order', default='time')
     parser.add_argument('--apikey', default='../apikey.json')
+    parser.add_argument('--pageToken', default=None)
     args = parser.parse_args()
 
     # build kwargs from args
@@ -145,6 +146,9 @@ def main():
 
     if not args.token_filename:
         args.token_filename = video_id + "_page_token"
+
+    if not kwargs.get('pageToken'):
+        kwargs.pop('pageToken')
 
     kwargs['videoId'] = video_id
     kwargs['service'] = service
