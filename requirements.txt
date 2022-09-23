@@ -10,7 +10,7 @@ httplib2==0.18.1
 idna==2.10
 numpy==1.19.0
 pandas==1.0.5
-protobuf==3.12.2
+protobuf==3.18.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 python-dateutil==2.8.1
